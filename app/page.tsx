@@ -711,7 +711,7 @@ function ScrollTopButton() {
       animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0.6, y: visible ? 0 : 12 }}
       transition={{ duration: 0.3, ease: EASE }}
       style={{ pointerEvents: visible ? 'auto' : 'none' }}
-      className="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--line)] bg-[color:var(--surface)]/90 text-[color:var(--body)] backdrop-blur-md transition-colors duration-300 hover:text-[color:var(--accent-text)]"
+      className="fixed bottom-6 right-6 z-40 hidden h-12 w-12 items-center justify-center rounded-full border border-[color:var(--line)] bg-[color:var(--surface)]/90 text-[color:var(--body)] backdrop-blur-md transition-colors duration-300 hover:text-[color:var(--accent-text)] md:flex"
     >
       <svg viewBox="0 0 40 40" aria-hidden className="absolute inset-0 h-full w-full -rotate-90">
         <circle cx="20" cy="20" r="15.5" fill="none" strokeWidth="2" style={{ stroke: 'var(--line)' }} />
@@ -1174,7 +1174,7 @@ function Portrait() {
             fill
             unoptimized
             sizes="(min-width: 1024px) 340px, 92vw"
-            className="object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:grayscale-0"
+            className="object-cover grayscale transition-all duration-700 ease-out [@media(hover:none)]:grayscale-0 group-hover:scale-[1.03] group-hover:grayscale-0"
           />
           <div
             aria-hidden
@@ -1248,7 +1248,7 @@ function Portrait() {
 /* ------------------------------------------------------------------ */
 
 const PROJECT_CARD_BASE =
-  'group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-7 transition-colors duration-300 hover:border-[color:var(--accent-soft)] md:p-8'
+  'group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-6 transition-colors duration-300 hover:border-[color:var(--accent-soft)] md:p-8'
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -1335,7 +1335,7 @@ function ContactForm() {
   }
 
   const inputClasses =
-    'w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--field)] px-4 py-3 text-sm text-[color:var(--heading)] placeholder:text-[color:var(--faint)] outline-none transition-colors duration-300 focus:border-[color:var(--accent-soft)] focus:ring-2 focus:ring-[color:var(--accent-faint)]'
+  'w-full rounded-lg border border-[color:var(--line)] bg-[color:var(--field)] px-4 py-3 text-sm [@media(pointer:coarse)]:text-base text-[color:var(--heading)] placeholder:text-[color:var(--faint)] outline-none transition-colors duration-300 focus:border-[color:var(--accent-soft)] focus:ring-2 focus:ring-[color:var(--accent-faint)]'
 
   const labelClasses = `mb-2 block text-[11px] uppercase tracking-[0.2em] text-[color:var(--muted)] ${monoClass}`
 
@@ -1558,11 +1558,15 @@ export default function PortfolioPage() {
                       style={{ transformPerspective: 900 }}
                       className="group h-full rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-7 transition-colors duration-300 hover:border-[color:var(--accent-soft)]"
                     >
-                      <div className="flex items-start justify-between gap-4">
+                      <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
                         {exp.logo ? (
-                          <span className="flex h-14 shrink-0 items-center rounded-lg border border-[color:var(--line)] px-3 transition-colors duration-300 group-hover:border-[color:var(--accent-soft)]">
+                          <span className="flex h-12 shrink-0 items-center rounded-lg border border-[color:var(--line)] px-2.5 transition-colors duration-300 group-hover:border-[color:var(--accent-soft)] md:h-14 md:px-3">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={exp.logo} alt={`${exp.org} logo`} className="h-12 w-auto max-w-[170px] object-contain" />
+                            <img
+                              src={exp.logo}
+                              alt={`${exp.org} logo`}
+                              className="h-9 w-auto max-w-[110px] object-contain md:h-12 md:max-w-[170px]"
+                            />
                           </span>
                         ) : (
                           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[color:var(--line)] text-[color:var(--accent-text)] transition duration-300 group-hover:rotate-6 group-hover:border-[color:var(--accent-soft)] group-hover:bg-[color:var(--accent-faint)]">
