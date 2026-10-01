@@ -629,7 +629,7 @@ function Cursor() {
     if (!window.matchMedia('(pointer: fine)').matches) return
     setEnabled(true)
 
-    const onMove = (e: MouseEvent) => {
+    const onMove = (e: globalThis.MouseEvent) => {
       x.set(e.clientX)
       y.set(e.clientY)
       setVisible(true)
