@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* ------- Theme tokens: dark is the default, .theme-light overrides ------- */
+:root {
+  --bg: #0B0F19;
+  --surface: #1A202C;
+  --field: #0B0F19;
+  --heading: #F3F4F6;
+  --body: #9CA3AF;
+  --muted: rgba(156, 163, 175, 0.62);
+  --muted-strong: rgba(156, 163, 175, 0.78);
+  --faint: rgba(156, 163, 175, 0.45);
+  --line: rgba(255, 255, 255, 0.1);
+  --line-faint: rgba(255, 255, 255, 0.05);
+  --ghost: rgba(255, 255, 255, 0.04);
+  --accent: #00E5FF;
+  --accent-text: #00E5FF;
+  --accent-soft: rgba(0, 229, 255, 0.4);
+  --accent-faint: rgba(0, 229, 255, 0.18);
+  --nav-ghost: rgba(11, 15, 25, 0.5);
+  --nav-solid: rgba(11, 15, 25, 0.85);
+  --grid-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.theme-light {
+  --bg: #F4F6F9;
+  --surface: #FFFFFF;
+  --field: #F1F5F9;
+  --heading: #0F172A;
+  --body: #475569;
+  --muted: rgba(71, 85, 105, 0.62);
+  --muted-strong: rgba(71, 85, 105, 0.78);
+  --faint: rgba(71, 85, 105, 0.45);
+  --line: rgba(15, 23, 42, 0.12);
+  --line-faint: rgba(15, 23, 42, 0.07);
+  --ghost: rgba(15, 23, 42, 0.06);
+  --accent: #06B6D4;
+  --accent-text: #0E7490;
+  --accent-soft: rgba(8, 145, 178, 0.45);
+  --accent-faint: rgba(8, 145, 178, 0.2);
+  --nav-ghost: rgba(244, 246, 249, 0.7);
+  --nav-solid: rgba(244, 246, 249, 0.92);
+  --grid-image: linear-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+}
+
+/* Custom cursor: hide the native one on precise pointers (mouse) only */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Card grids: hovering one card gently focuses it by dimming its siblings */
+.focus-grid .focus-item {
+  transition: opacity 0.35s ease, filter 0.35s ease;
+}
+.focus-grid:hover .focus-item:not(:hover) {
+  opacity: 0.45;
+  filter: saturate(0.6);
+}
