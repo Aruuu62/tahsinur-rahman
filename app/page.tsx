@@ -1160,14 +1160,8 @@ function Portrait() {
   return (
     <div className="group mx-auto w-full max-w-[320px] lg:mx-0 lg:max-w-none">
       <div className="relative">
-        {/* Photo wipes in from the top on first view */}
-        <motion.div
-          initial={{ clipPath: 'inset(0 0 100% 0)' }}
-          whileInView={{ clipPath: 'inset(0 0 0% 0)' }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.9, ease: EASE }}
-          className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)]"
-        >
+        {/* Frame — photo always rendered, no clip animation to get stuck */}
+        <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)]">
           <Image
             src={PORTRAIT_PATH}
             alt="Portrait of M. Tahsinur Rahman"
@@ -1176,69 +1170,28 @@ function Portrait() {
             sizes="(min-width: 1024px) 340px, 92vw"
             className="object-cover grayscale transition-all duration-700 ease-out [@media(hover:none)]:grayscale-0 group-hover:scale-[1.03] group-hover:grayscale-0"
           />
+          {/* Scanner line — sweeps down on hover (desktop only) */}
           <div
             aria-hidden
             className="absolute inset-x-4 top-[10%] h-[2px] rounded-full bg-[color:var(--accent-soft)] opacity-0 transition-all duration-700 ease-out group-hover:top-[90%] group-hover:opacity-100"
           />
-        </motion.div>
+        </div>
 
-        {/* Brackets pop in one corner at a time, then nudge on hover */}
-        <motion.span
-          aria-hidden
-          initial={{ opacity: 0, scale: 0.2 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ delay: 0.65, type: 'spring', stiffness: 300, damping: 18 }}
-          className="absolute -left-2.5 -top-2.5"
-        >
-          <span className="block h-5 w-5 border-l-2 border-t-2 border-[color:var(--accent-text)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1" />
-        </motion.span>
-        <motion.span
-          aria-hidden
-          initial={{ opacity: 0, scale: 0.2 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ delay: 0.72, type: 'spring', stiffness: 300, damping: 18 }}
-          className="absolute -right-2.5 -top-2.5"
-        >
-          <span className="block h-5 w-5 border-r-2 border-t-2 border-[color:var(--accent-text)] transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
-        </motion.span>
-        <motion.span
-          aria-hidden
-          initial={{ opacity: 0, scale: 0.2 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ delay: 0.79, type: 'spring', stiffness: 300, damping: 18 }}
-          className="absolute -bottom-2.5 -left-2.5"
-        >
-          <span className="block h-5 w-5 border-b-2 border-l-2 border-[color:var(--accent-text)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:translate-y-1" />
-        </motion.span>
-        <motion.span
-          aria-hidden
-          initial={{ opacity: 0, scale: 0.2 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ delay: 0.86, type: 'spring', stiffness: 300, damping: 18 }}
-          className="absolute -bottom-2.5 -right-2.5"
-        >
-          <span className="block h-5 w-5 border-b-2 border-r-2 border-[color:var(--accent-text)] transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1" />
-        </motion.span>
+        {/* Targeting brackets — pure CSS, nudge on hover */}
+        <span aria-hidden className="absolute -left-2.5 -top-2.5 h-5 w-5 border-l-2 border-t-2 border-[color:var(--accent-text)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1" />
+        <span aria-hidden className="absolute -right-2.5 -top-2.5 h-5 w-5 border-r-2 border-t-2 border-[color:var(--accent-text)] transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
+        <span aria-hidden className="absolute -bottom-2.5 -left-2.5 h-5 w-5 border-b-2 border-l-2 border-[color:var(--accent-text)] transition-transform duration-500 group-hover:-translate-x-1 group-hover:translate-y-1" />
+        <span aria-hidden className="absolute -bottom-2.5 -right-2.5 h-5 w-5 border-b-2 border-r-2 border-[color:var(--accent-text)] transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1" />
       </div>
 
-      {/* Caption fades in last */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ delay: 0.95, duration: 0.5, ease: EASE }}
-        className={`mt-5 flex items-center justify-between text-[11px] ${monoClass}`}
-      >
+      {/* Caption */}
+      <div className={`mt-5 flex items-center justify-between text-[11px] ${monoClass}`}>
         <span className="text-[color:var(--body)]">M. Tahsinur Rahman</span>
         <span className="flex items-center gap-2 text-[color:var(--muted)]">
           <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]" />
-          Dhaka, Bangladesh
+          dhaka, bd
         </span>
-      </motion.div>
+      </div>
     </div>
   )
 }

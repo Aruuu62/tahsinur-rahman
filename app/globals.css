@@ -86,3 +86,9 @@ body {
   opacity: 0.45;
   filter: saturate(0.6);
 }
+
+/* Kill horizontal overflow — without breaking the sticky navbar */
+html,
+body {
+  overflow-x: clip;
+}
